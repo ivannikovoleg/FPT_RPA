@@ -8,3 +8,4 @@ dependencies:
       - rpaframework==10.0.6
       - selenium==4.0.0
       - XlsxWriter==3.0.1
+      - pymupdf==1.19.1

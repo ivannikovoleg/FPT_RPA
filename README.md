@@ -3,4 +3,5 @@ Automate the process of extracting data from [**itdashboard.gov**](http://itdash
 
 - Selenium
 - Xlsxwriter
+- PyMuPDF
 
