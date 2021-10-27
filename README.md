@@ -5,3 +5,4 @@ Automate the process of extracting data from [**itdashboard.gov**](http://itdash
 - Xlsxwriter
 - PyMuPDF
 
+Put name of department into config.txt.
