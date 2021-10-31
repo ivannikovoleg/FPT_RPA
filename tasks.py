@@ -50,9 +50,8 @@ def main():
     dive_it = driver.find_element(By.XPATH, "//*[@id='node-23']/div/div/div/div/div/div/div/a")
     dive_it.click()
     print('Click on "Dive in"!')
-
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="agency-tiles-container"]')))
-    deps = driver.find_elements(By.XPATH, '//div[@id="agency-tiles-widget"]//span[@class="h4 w200"]')
+    deps = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located(
+        (By.XPATH, '//div[@id="agency-tiles-widget"]//span[@class="h4 w200"]')))
     budgets = driver.find_elements(By.XPATH, '//div[@id="agency-tiles-widget"]//span[@class=" h1 w900"]')
 
     workbook = xlsxwriter.Workbook('output/write_data.xlsx')
@@ -65,9 +64,8 @@ def main():
     print('Departments budgets: Done!')
 
     driver.find_element(By.XPATH, f"//span[contains(text(), '{dep_to_scrap}')]").click()
-    WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.XPATH, '//*[@id="investments-table-object_length"]/label/select')))
-    select = Select(driver.find_element(By.XPATH, '//*[@id="investments-table-object_length"]/label/select'))
+    select = Select(WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, '//*[@id="investments-table-object_length"]/label/select'))))
     select.select_by_value('-1')
     print('Show all entries.')
     time.sleep(15)
@@ -101,8 +99,8 @@ def main():
         links.append(url.get_attribute("href"))
     for link in links:
         driver.get(link)
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="business-case-pdf"]/a')))
-        button = driver.find_element(By.XPATH, '//*[@id="business-case-pdf"]/a')
+        button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="business-case-pdf"]/a')))
         driver.execute_script("arguments[0].click();", button)
         print('Downloading file.')
         time.sleep(10)
